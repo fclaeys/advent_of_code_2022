@@ -1,13 +1,17 @@
 defmodule AdventOfCode2022.Day2 do
+  defp parse_input() do
+    File.stream!(Path.join("data", "day2_1.txt"))
+    |> Stream.flat_map(&String.split(&1, "\n", trim: true))
+    |> Enum.map(&String.split(&1, " "))
+    |> Enum.map(&List.to_tuple(&1))
+  end
+
   # A, X -> rock
   # B, Y -> paper
   # C, Z -> scissors
 
   def rock_paper_scissors_1() do
-    File.stream!(Path.join("data", "day2_1.txt"))
-    |> Stream.flat_map(&String.split(&1, "\n", trim: true))
-    |> Enum.map(&String.split(&1, " "))
-    |> Enum.map(&List.to_tuple(&1))
+    parse_input()
     |> Enum.reduce(0, fn {opp, guess}, acc -> acc + score(opp, guess) end)
   end
 
@@ -16,10 +20,7 @@ defmodule AdventOfCode2022.Day2 do
   # Z -> win
 
   def rock_paper_scissors_2() do
-    File.stream!(Path.join("data", "day2_1.txt"))
-    |> Stream.flat_map(&String.split(&1, "\n", trim: true))
-    |> Enum.map(&String.split(&1, " "))
-    |> Enum.map(&List.to_tuple(&1))
+    parse_input()
     |> Enum.map(fn {opp, outcome} -> {opp, choose_guess(opp, outcome)} end)
     |> Enum.reduce(0, fn {opp, guess}, acc -> acc + score(opp, guess) end)
   end
