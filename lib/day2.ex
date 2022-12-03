@@ -6,19 +6,11 @@ defmodule AdventOfCode2022.Day2 do
     |> Enum.map(&List.to_tuple(&1))
   end
 
-  # A, X -> rock
-  # B, Y -> paper
-  # C, Z -> scissors
-
   def rock_paper_scissors_1() do
     parse_input()
     |> Enum.map(&score/1)
     |> Enum.sum()
   end
-
-  # X -> lose
-  # Y -> draw
-  # Z -> win
 
   def rock_paper_scissors_2() do
     parse_input()
